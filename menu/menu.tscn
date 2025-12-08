@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0xo85yn8an7q"]
+
+[ext_resource type="Script" uid="uid://tc23xjvu1dvd" path="res://menu/button_manhattan.gd" id="1_pbjm4"]
+[ext_resource type="Script" uid="uid://creyqbye0lb7v" path="res://menu/button_euclidiana.gd" id="2_svuvw"]
+[ext_resource type="Script" uid="uid://msn2ofmod5rf" path="res://menu/button_octile.gd" id="3_juveg"]
+[ext_resource type="Script" uid="uid://bhdoroymdbqf6" path="res://menu/button_chebyshev.gd" id="4_v6yed"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -10.0
+offset_right = 2.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Seleccionar Algoritmo"
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+text = "Habilitar Diagonales"
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+current_tab = 0
+
+[node name="A*" type="TabBar" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/A*"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 13.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Button Manhattan" type="Button" parent="VBoxContainer/TabContainer/A*/VBoxContainer"]
+layout_mode = 2
+text = "Manhattan"
+script = ExtResource("1_pbjm4")
+
+[node name="Button Euclidiana" type="Button" parent="VBoxContainer/TabContainer/A*/VBoxContainer"]
+layout_mode = 2
+text = "Euclidiana"
+script = ExtResource("2_svuvw")
+
+[node name="Button Octile" type="Button" parent="VBoxContainer/TabContainer/A*/VBoxContainer"]
+layout_mode = 2
+text = "Octile"
+script = ExtResource("3_juveg")
+
+[node name="Button Chebyshev" type="Button" parent="VBoxContainer/TabContainer/A*/VBoxContainer"]
+layout_mode = 2
+text = "Chebyshev"
+script = ExtResource("4_v6yed")
+
+[node name="TabBar2" type="TabBar" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="TabBar3" type="TabBar" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Manhattan" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Manhattan" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Euclidiana" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Euclidiana" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Octile" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Octile" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Chebyshev" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Chebyshev" method="_on_pressed"]

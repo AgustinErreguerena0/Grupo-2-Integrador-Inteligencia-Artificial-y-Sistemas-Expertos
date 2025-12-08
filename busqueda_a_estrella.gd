@@ -27,8 +27,7 @@ var _camino := PackedVector2Array()
 
 # Función que se ejecuta cuando el nodo está listo
 func _ready() -> void:
-	# La región debe coincidir con el tamaño del área jugable más uno (en baldosas)
-	# En esta demo, el área jugable es de 17×9 baldosas, por lo que el tamaño del rect es 18×10
+
 	# Dependiendo de la configuración, también se puede usar get_used_rect() del TileMapLayer
 	_astar.region = Rect2i(0, 0, 18, 10)
 	
@@ -40,29 +39,20 @@ func _ready() -> void:
 	
 	# Configura la heurística de Manhattan para calcular distancias
 	# (solo movimientos horizontales y verticales, no diagonales)
-	_astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_OCTILE
-	_astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_OCTILE
+	_astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	_astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	
 	# Habilita el movimiento diagonal
-	_astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
+	_astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	
 	# Actualiza la grilla de A* con la configuración establecida
 	_astar.update()
 	
-	# Itera sobre todas las celdas usadas en la capa del TileMap
+	# Itera sobre todas las celdas usadas (obstáculos) en la capa del TileMap
 	# y las marca como no transitables (obstáculos)
 	for pos in get_used_cells():
 		_astar.set_point_solid(pos)
 		
-		# Para omitir celdas con ciertas coordenadas del atlas puedes usar:
-		# if get_cell_atlas_coords(pos) == Vector2i(42, 23):
-		#     ...
-		
-		# También puedes agregar una "Capa de Datos Personalizados" al tileset para agrupar
-		# baldosas y verificarlo aquí; en el siguiente ejemplo usando un string:
-		# if get_cell_tile_data(pos).get_custom_data("tipo") == "obstaculo":
-		#     ...
-
 # Función que dibuja el camino en pantalla
 func _draw() -> void:
 	# Si no hay camino, no dibuja nada
@@ -88,7 +78,7 @@ func _draw() -> void:
 # Función que redondea una posición local a la posición central de su celda
 func redondear_posicion_local(posicion_local: Vector2i) -> Vector2i:
 	# Convierte de posición local a coordenadas de mapa y luego de vuelta a local
-	# Esto efectivamente redondea la posición al centro de la celda más cercana
+	# Esto redondea la posición al centro de la celda más cercana
 	return map_to_local(local_to_map(posicion_local))
 
 # Función que verifica si un punto es transitable (no es un obstáculo)
