@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0xo85yn8an7q"]
+[gd_scene load_steps=6 format=3 uid="uid://c0xo85yn8an7q"]
 
 [ext_resource type="Script" uid="uid://tc23xjvu1dvd" path="res://menu/button_manhattan.gd" id="1_pbjm4"]
+[ext_resource type="Script" uid="uid://bp5urabua8sj7" path="res://menu/button_diagonal.gd" id="1_svuvw"]
 [ext_resource type="Script" uid="uid://creyqbye0lb7v" path="res://menu/button_euclidiana.gd" id="2_svuvw"]
 [ext_resource type="Script" uid="uid://msn2ofmod5rf" path="res://menu/button_octile.gd" id="3_juveg"]
 [ext_resource type="Script" uid="uid://bhdoroymdbqf6" path="res://menu/button_chebyshev.gd" id="4_v6yed"]
@@ -39,6 +40,7 @@ text = "Seleccionar Algoritmo"
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer"]
 layout_mode = 2
 text = "Habilitar Diagonales"
+script = ExtResource("1_svuvw")
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -89,6 +91,7 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
+[connection signal="toggled" from="VBoxContainer/CheckButton" to="VBoxContainer/CheckButton" method="_on_toggled"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Manhattan" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Manhattan" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Euclidiana" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Euclidiana" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Octile" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Octile" method="_on_pressed"]

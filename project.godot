@@ -18,6 +18,10 @@ run/main_scene="uid://c0xo85yn8an7q"
 config/features=PackedStringArray("4.5")
 config/icon="res://icon.webp"
 
+[autoload]
+
+GlobalVar="*res://datos/global_var.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1

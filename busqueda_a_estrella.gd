@@ -27,7 +27,8 @@ var _camino := PackedVector2Array()
 
 # Función que se ejecuta cuando el nodo está listo
 func _ready() -> void:
-
+	var heuristica = GlobalVar.get_heuristica()
+	var diagonal = GlobalVar.get_diagonal()
 	# Dependiendo de la configuración, también se puede usar get_used_rect() del TileMapLayer
 	_astar.region = Rect2i(0, 0, 18, 10)
 	
@@ -39,11 +40,12 @@ func _ready() -> void:
 	
 	# Configura la heurística de Manhattan para calcular distancias
 	# (solo movimientos horizontales y verticales, no diagonales)
-	_astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	_astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	_astar.default_compute_heuristic = heuristica
+	_astar.default_estimate_heuristic = heuristica
+	
 	
 	# Habilita el movimiento diagonal
-	_astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	_astar.diagonal_mode = diagonal
 	
 	# Actualiza la grilla de A* con la configuración establecida
 	_astar.update()
