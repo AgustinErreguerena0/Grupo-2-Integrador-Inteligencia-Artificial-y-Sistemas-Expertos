@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0xo85yn8an7q"]
+[gd_scene load_steps=8 format=3 uid="uid://c0xo85yn8an7q"]
 
 [ext_resource type="Script" uid="uid://tc23xjvu1dvd" path="res://menu/button_manhattan.gd" id="1_pbjm4"]
 [ext_resource type="Script" uid="uid://bp5urabua8sj7" path="res://menu/button_diagonal.gd" id="1_svuvw"]
 [ext_resource type="Script" uid="uid://creyqbye0lb7v" path="res://menu/button_euclidiana.gd" id="2_svuvw"]
 [ext_resource type="Script" uid="uid://msn2ofmod5rf" path="res://menu/button_octile.gd" id="3_juveg"]
 [ext_resource type="Script" uid="uid://bhdoroymdbqf6" path="res://menu/button_chebyshev.gd" id="4_v6yed"]
+[ext_resource type="Script" uid="uid://c17nokcube11u" path="res://menu/button_bfs.gd" id="6_juveg"]
+[ext_resource type="Script" uid="uid://bvrkoym1x3q8i" path="res://menu/button_dfs.gd" id="7_v6yed"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -44,9 +46,10 @@ script = ExtResource("1_svuvw")
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
-current_tab = 0
+current_tab = 1
 
 [node name="A*" type="TabBar" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -81,18 +84,40 @@ layout_mode = 2
 text = "Chebyshev"
 script = ExtResource("4_v6yed")
 
-[node name="TabBar2" type="TabBar" parent="VBoxContainer/TabContainer"]
-visible = false
+[node name="BFS" type="TabBar" parent="VBoxContainer/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="TabBar3" type="TabBar" parent="VBoxContainer/TabContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/BFS"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button BFS" type="Button" parent="VBoxContainer/TabContainer/BFS/VBoxContainer"]
+layout_mode = 2
+text = "Iniciar BFS"
+script = ExtResource("6_juveg")
+
+[node name="DFS" type="TabBar" parent="VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/DFS"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button DFS" type="Button" parent="VBoxContainer/TabContainer/DFS/VBoxContainer"]
+layout_mode = 2
+text = "Iniciar DFS
+"
+script = ExtResource("7_v6yed")
 
 [connection signal="toggled" from="VBoxContainer/CheckButton" to="VBoxContainer/CheckButton" method="_on_toggled"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Manhattan" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Manhattan" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Euclidiana" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Euclidiana" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Octile" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Octile" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/A*/VBoxContainer/Button Chebyshev" to="VBoxContainer/TabContainer/A*/VBoxContainer/Button Chebyshev" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/BFS/VBoxContainer/Button BFS" to="VBoxContainer/TabContainer/BFS/VBoxContainer/Button BFS" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/DFS/VBoxContainer/Button DFS" to="VBoxContainer/TabContainer/DFS/VBoxContainer/Button DFS" method="_on_pressed"]

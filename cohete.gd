@@ -1,7 +1,7 @@
 extends Node2D
 
 # Precarga la clase personalizada que maneja la búsqueda de caminos con A*
-const BusquedaCaminoAEstrella = preload("./busqueda_a_estrella.gd")
+const BusquedaCaminoAEstrella = preload("./busquedas.gd")
 
 # Enumeración que define los posibles estados del personaje
 enum Estado {
