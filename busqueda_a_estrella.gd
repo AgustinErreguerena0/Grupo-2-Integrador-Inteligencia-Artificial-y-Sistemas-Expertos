@@ -3,7 +3,7 @@ extends TileMapLayer
 # Coordenadas del atlas en el tileset para las baldosas de inicio/fin
 const BALDOSA_PUNTO_INICIO = Vector2i(1, 0)
 const BALDOSA_PUNTO_FIN = Vector2i(2, 0)
-
+var longitud_camino: int
 # Tamaño de cada celda del mapa en píxeles
 const TAMANO_CELDA = Vector2i(64, 64)
 
@@ -30,7 +30,7 @@ func _ready() -> void:
 	var heuristica = GlobalVar.get_heuristica()
 	var diagonal = GlobalVar.get_diagonal()
 	# Dependiendo de la configuración, también se puede usar get_used_rect() del TileMapLayer
-	_astar.region = Rect2i(0, 0, 18, 10)
+	_astar.region = Rect2i(0, 0, 18,	 10)
 	
 	# Establece el tamaño de cada celda para los cálculos de distancia
 	_astar.cell_size = TAMANO_CELDA
@@ -121,7 +121,8 @@ func encontrar_camino(punto_inicio_local: Vector2i, punto_fin_local: Vector2i) -
 	
 	# Usa A* para calcular el camino óptimo entre inicio y fin
 	_camino = _astar.get_point_path(_punto_inicio, _punto_fin)
-	
+	longitud_camino = _camino.size()
+	print(longitud_camino)
 	# Si se encontró un camino válido
 	if not _camino.is_empty():
 		# Coloca una baldosa marcadora en el punto de inicio
@@ -132,6 +133,6 @@ func encontrar_camino(punto_inicio_local: Vector2i, punto_fin_local: Vector2i) -
 	
 	# Encola un redibujado para visualizar las líneas y círculos del camino
 	queue_redraw()
-	
+	GlobalVar.actualizar_panel.emit(longitud_camino)	
 	# Retorna una copia del camino calculado
 	return _camino.duplicate()
