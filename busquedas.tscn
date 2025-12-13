@@ -70,16 +70,17 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = 948.0
-offset_right = 1155.0
-offset_bottom = 65.0
+offset_right = 1152.0
+offset_bottom = 88.0
 grow_horizontal = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" node_paths=PackedStringArray("longitud_camino")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" node_paths=PackedStringArray("longitud_camino", "nodos_explorados")]
 layout_mode = 1
 offset_right = 204.0
 offset_bottom = 85.0
 script = ExtResource("7_clxsr")
 longitud_camino = NodePath("label_longitud_camino")
+nodos_explorados = NodePath("label_explorados")
 
 [node name="Button_volver" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -91,10 +92,9 @@ script = ExtResource("8_wvjyw")
 layout_mode = 2
 text = "Longitud del camino:"
 
-[node name="label_evaluados" type="Label" parent="Panel/VBoxContainer"]
-unique_name_in_owner = true
+[node name="label_explorados" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_16y4w")
-text = "Evaluados: "
+text = "Nodos explorados: -"
 
 [connection signal="pressed" from="Panel/VBoxContainer/Button_volver" to="Panel/VBoxContainer/Button_volver" method="_on_pressed"]

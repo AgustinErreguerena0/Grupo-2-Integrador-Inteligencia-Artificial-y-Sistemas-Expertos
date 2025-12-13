@@ -6,7 +6,7 @@ const BALDOSA_PUNTO_FIN = Vector2i(2, 0)
 
 # Variable para métricas
 var longitud_camino: int
-
+var cantidad_visitados: int
 # Tamaño de cada celda en píxeles
 const TAMANO_CELDA = Vector2i(64, 64)
 
@@ -53,13 +53,7 @@ func _ready() -> void:
 	if GlobalVar.has_method("get_tipo_algoritmo"):
 		tipo = GlobalVar.get_tipo_algoritmo()
 		
-	# Configuración INICIAL de la interfaz
-	if %label_evaluados:
-		if tipo == "ASTAR":
-			%label_evaluados.visible = false  # <--- ¡Se oculta inmediatamente!
-		else:
-			%label_evaluados.visible = true   # Se muestra para BFS/DFS
-			%label_evaluados.text = "Visitados: 0"
+	
 
 func _draw() -> void:
 	# 1. Dibujar área explorada (verde)
@@ -183,29 +177,15 @@ func encontrar_camino(punto_inicio_local: Vector2i, punto_fin_local: Vector2i) -
 		
 		
 	longitud_camino = _camino.size()
-	
-	var cantidad_visitados = _celdas_visitadas_dibujo.size()
-	print("Longitud: ", longitud_camino, " | Visitados: ", cantidad_visitados)
-	
-
-	# Condiciones para determinar que NO se vea la etiqueta "Evaluados" para los nodos visitados en A*
-	if %label_evaluados:
-		if tipo == "ASTAR":
-			%label_evaluados.visible = false
-		else:
-			%label_evaluados.visible = true
-			%label_evaluados.text = "Visitados: " + str(cantidad_visitados)
-	# Actualizar la longitud de los nodos visitados/evaluados
-	if %label_longitud:
-		%label_longitud.text = "Longitud: " + str(longitud_camino)
-
+	cantidad_visitados = 0
+	cantidad_visitados = _celdas_visitadas_dibujo.size()
+	GlobalVar.actualizar_panel.emit(longitud_camino, cantidad_visitados)
 	if not _camino.is_empty():
 		set_cell(_punto_inicio, 0, BALDOSA_PUNTO_INICIO)
 		set_cell(_punto_fin, 0, BALDOSA_PUNTO_FIN)
 		
 	queue_redraw()
 		
-	if GlobalVar.has_signal("actualizar_panel"):
-		GlobalVar.actualizar_panel.emit(longitud_camino, cantidad_visitados)
+	
 		
 	return _camino.duplicate()
