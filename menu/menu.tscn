@@ -46,10 +46,9 @@ script = ExtResource("1_svuvw")
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 
 [node name="A*" type="TabBar" parent="VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -85,13 +84,15 @@ text = "Chebyshev"
 script = ExtResource("4_v6yed")
 
 [node name="BFS" type="TabBar" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/BFS"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+offset_top = 10.0
+offset_right = 412.0
+offset_bottom = 95.0
 
 [node name="Button BFS" type="Button" parent="VBoxContainer/TabContainer/BFS/VBoxContainer"]
 layout_mode = 2
@@ -105,8 +106,9 @@ metadata/_tab_index = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/DFS"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 10.0
+offset_right = 413.0
+offset_bottom = 159.0
 
 [node name="Button DFS" type="Button" parent="VBoxContainer/TabContainer/DFS/VBoxContainer"]
 layout_mode = 2
